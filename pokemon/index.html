@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pokemon</title>
+
+    <!-- Update your html tag to include the itemscope and itemtype attributes. -->
+<!--<html itemscope itemtype="http://schema.org/Webpage">-->
+
+<!-- Place this data between the <head> tags of your website -->
+<title>Pokemon</title>
+<meta name="description" content="Pokemon Aframe Demo" />
+
+<!-- Schema.org markup (Google) -->
+<meta itemprop="name" content="Pokemon">
+<meta itemprop="description" content="Pokemon Aframe Demo">
+<meta itemprop="image" content="">
+
+<!-- Twitter Card markup-->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="">
+<meta name="twitter:title" content="Pokemon">
+<meta name="twitter:description" content="Pokemon Aframe Demo">
+<meta name="twitter:creator" content="rabimba">
+<!-- Twitter summary card with large image must be at least 280x150px -->
+<meta name="twitter:image" content="">
+<meta name="twitter:image:alt" content="Pokemon Aframe Demo">
+
+<!-- Open Graph markup (Facebook, Pinterest) -->
+<meta property="og:title" content="Pokemon" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="" />
+<meta property="og:image" content="" />
+<meta property="og:description" content="Pokemon Aframe Demo" />
+<meta property="og:site_name" content="PokeMon" />
+
+    <script src="../lib/aframe.min.js"></script>
+    <script src="../lib/aframe-extras.loaders.min.js"></script>
+    <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-particle-system-component@1.0.1/dist/aframe-particle-system-component.min.js"></script>
+    <script src="https://npmcdn.com/aframe-look-at-component@1.0.2"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <a-asset-item id="stadium-ply" src="models/stadium.ply"></a-asset-item>
+        <a-asset-item id="seating-ply" src="models/seating.ply"></a-asset-item>
+        <a-asset-item id="pikachu-ply" src="models/pikachu.ply"></a-asset-item>
+        <img id="charizard" src="images/charizard.png">
+        <audio id="song" autoplay loop src="audio/pokemon-gym-battle.mp3"></audio>
+      </a-assets>
+
+      <!-- Model. -->
+      <a-entity ply-model="src: #stadium-ply"
+                position="0 -11 -27" scale=".8 .8 .8" rotation="-90 0 0"></a-entity>
+      <!-- Facing user. -->
+      <a-entity ply-model="src: #seating-ply"
+                position="0 -8 -110" scale=".8 .8 .8" rotation="-90 90 0"></a-entity>
+      <!-- Stage left. -->
+      <a-entity ply-model="src: #seating-ply"
+                position="-65 -8 -10" scale=".8 .8 .8" rotation="-90 180 0"></a-entity>
+      <!-- Stage right. -->
+      <a-entity ply-model="src: #seating-ply"
+                position="65 -8 -10" scale=".8 .8 .8" rotation="-90 0 0"></a-entity>
+      <!-- Pikachu. -->
+      <a-entity position="1.4 -0.6 -3">
+        <a-entity ply-model="src: #pikachu-ply" scale=".1 .1 .1" rotation="-90 -80 0"></a-entity>
+        <a-sphere src="images/lightning.jpg" position="0 0 -0.5" rotation="-90 0 0"
+                  color="#FFF" radius="1.8" opacity="0.3" shader="flat"
+                  animation="property: opacity; loop: true; to: 0.4; dur: 1000"></a-sphere>
+      </a-entity>
+
+      <!-- Particles. -->
+      <a-entity particle-system="preset: dust; particleCount: 1000" position="0 2.5 -15"></a-entity>
+
+      <a-image src="#charizard" transparent="true" shader="standard" position="0 7 -40"
+               scale="20 20 1" look-at="[camera]"></a-image>
+
+      <!-- Lights. -->
+      <a-light type="ambient" color="#777"></a-light>
+      <a-entity animation="property: rotation; to: 0 360 0; easing: linear; loop: true;
+                           duration: 2000">
+        <a-light type="point" color="#FFF" position="-10 10 -15" intensity="0.3"></a-light>
+        <a-light type="point" color="#FFF" position="10 10 -15" intensity="0.3"></a-light>
+      </a-entity>
+
+      <a-sky color="#111"></a-sky>
+      <a-camera position="0 1.8 4"></a-camera>
+    </a-scene>
+
+    <script src="http://localhost:3333/build/aframe-inspector.js"></script>
+  </body>
+</html>
